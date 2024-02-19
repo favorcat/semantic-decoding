@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import torch
 
 # paths
 
@@ -38,7 +39,13 @@ EXTENSIONS = 5
 WINDOW = 20
 
 # devices
+if torch.backends.mps.is_available():
+    GPT_DEVICE = "mps"
+    EM_DEVICE = "mps"
+    SM_DEVICE = "mps"
+else:
+    GPT_DEVICE = "cpu"
+    EM_DEVICE = "cpu"
+    SM_DEVICE = "cpu"
 
-GPT_DEVICE = "cuda"
-EM_DEVICE = "cuda"
-SM_DEVICE = "cuda"
+print("GPT device:", GPT_DEVICE)
